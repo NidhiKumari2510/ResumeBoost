@@ -5,7 +5,7 @@ import { Wand2, Copy, Download, RefreshCw, Sparkles, CheckCircle, ArrowRight } f
 import FileUpload from '../components/FileUpload';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ScoreCircle from '../components/ScoreCircle';
-import { optimizeResume } from '../services/gemini';
+import { optimizeResume } from "../services/resumeService";
 import { extractTextFromFile } from '../utils/fileParser';
 
 interface OptimizeResult {

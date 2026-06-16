@@ -5,7 +5,7 @@ import { FileSearch, CheckCircle, XCircle, AlertTriangle, TrendingUp, Sparkles }
 import FileUpload from '../components/FileUpload';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ScoreCircle from '../components/ScoreCircle';
-import { analyzeATS } from '../services/gemini';
+import { analyzeATS } from "../services/atsService";;
 import { extractTextFromFile } from '../utils/fileParser';
 
 interface ATSResult {
