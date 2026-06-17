@@ -1,27 +1,19 @@
 import { Request, Response } from "express";
-import { generateGeminiResponse } from "../services/geminiService";
+import {
+  generateGeminiResponse,
+  parseGeminiJson,
+} from "../services/geminiService";
 
 export const analyzeATS = async (
-req: Request,
-res: Response
+  req: Request,
+  res: Response
 ) => {
-try {
-const { resumeText, jobDescription } = req.body;
+  try {
+    const { resumeText, jobDescription } =
+      req.body;
 
-
-if (!resumeText || !jobDescription) {
-  return res.status(400).json({
-    success: false,
-    message: "Resume text and job description are required",
-  });
-}
-
-const prompt = `
-
-
-You are an ATS (Applicant Tracking System) expert.
-
-Analyze the following resume against the provided job description.
+    const prompt = `
+Analyze this resume against the job description.
 
 Resume:
 ${resumeText}
@@ -29,36 +21,42 @@ ${resumeText}
 Job Description:
 ${jobDescription}
 
-Provide:
+Return ONLY valid JSON.
 
-1. ATS Score (out of 100)
-2. Keyword Match Percentage
-3. Missing Keywords
-4. Strengths
-5. Weaknesses
-6. Suggestions for Improvement
+{
+  "atsScore": 85,
+  "keywordMatchPercentage": 75,
+  "matchedKeywords": ["React"],
+  "missingKeywords": ["Docker"],
+  "strengths": ["Strong frontend skills"],
+  "improvements": ["Add Docker experience"],
+  "suggestions": [
+    {
+      "title": "Add Docker",
+      "description": "Mention Docker projects",
+      "priority": "high"
+    }
+  ],
+  "overallFeedback": "Good match"
+}
 
-Format the response clearly.
+No markdown.
+No explanation.
+JSON only.
 `;
 
+    const result =
+      await generateGeminiResponse(prompt);
 
-const result = await generateGeminiResponse(prompt);
+    const parsed = parseGeminiJson(result);
 
-res.status(200).json({
-  success: true,
-  data: result,
-});
+    res.status(200).json(parsed);
+  } catch (error) {
+    console.error(error);
 
-
-} catch (error) {
-console.error(error);
-
-
-res.status(500).json({
-  success: false,
-  message: "Failed to analyze ATS score",
-});
-
-
-}
+    res.status(500).json({
+      success: false,
+      message: "ATS analysis failed",
+    });
+  }
 };

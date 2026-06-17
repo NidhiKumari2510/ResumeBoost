@@ -9,5 +9,5 @@ export const generateQuestions = async (
     jobDescription,
   });
 
-  return response.data.data;
+  return response.data;
 };

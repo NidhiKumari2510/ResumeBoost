@@ -156,11 +156,11 @@ export default function ATSCheckerPage() {
                     <CheckCircle className="w-4 h-4 text-emerald-400" />
                     <h3 className="font-semibold text-white text-sm">Matched Keywords</h3>
                     <span className="ml-auto text-xs px-2 py-0.5 rounded-full bg-emerald-400/10 text-emerald-400 border border-emerald-400/20">
-                      {result.matchedKeywords.length}
+                      {result.matchedKeywords?.length || 0}
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {result.matchedKeywords.map((kw) => (
+                    {result.matchedKeywords?.map((kw) => (
                       <span key={kw} className="text-xs px-2.5 py-1 rounded-lg bg-emerald-400/8 text-emerald-300 border border-emerald-400/15">
                         {kw}
                       </span>
@@ -173,11 +173,11 @@ export default function ATSCheckerPage() {
                     <XCircle className="w-4 h-4 text-red-400" />
                     <h3 className="font-semibold text-white text-sm">Missing Keywords</h3>
                     <span className="ml-auto text-xs px-2 py-0.5 rounded-full bg-red-400/10 text-red-400 border border-red-400/20">
-                      {result.missingKeywords.length}
+                      {result.missingKeywords?.length || 0}
                     </span>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {result.missingKeywords.map((kw) => (
+                    {result.missingKeywords?.map((kw) => (
                       <span key={kw} className="text-xs px-2.5 py-1 rounded-lg bg-red-400/8 text-red-300 border border-red-400/15">
                         {kw}
                       </span>
@@ -194,7 +194,7 @@ export default function ATSCheckerPage() {
                     <h3 className="font-semibold text-white text-sm">Resume Strengths</h3>
                   </div>
                   <ul className="space-y-2.5">
-                    {result.strengths.map((s, i) => (
+                    {result.strengths?.map((s, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-slate-400">
                         <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
                         {s}
@@ -209,7 +209,7 @@ export default function ATSCheckerPage() {
                     <h3 className="font-semibold text-white text-sm">Areas of Improvement</h3>
                   </div>
                   <ul className="space-y-2.5">
-                    {result.improvements.map((imp, i) => (
+                    {result.improvements?.map((imp, i) => (
                       <li key={i} className="flex items-start gap-2.5 text-sm text-slate-400">
                         <AlertTriangle className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
                         {imp}
@@ -224,7 +224,7 @@ export default function ATSCheckerPage() {
                 <div className="glass-card p-6">
                   <h3 className="font-semibold text-white mb-4">AI Suggestions</h3>
                   <div className="grid md:grid-cols-2 gap-4">
-                    {result.suggestions.map((s, i) => (
+                    {result.suggestions?.map((s, i) => (
                       <div key={i} className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50">
                         <div className="flex items-center justify-between mb-2">
                           <p className="text-sm font-semibold text-white">{s.title}</p>

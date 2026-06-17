@@ -1,27 +1,15 @@
 import { Request, Response } from "express";
-import { generateGeminiResponse } from "../services/geminiService";
+import {
+  generateGeminiResponse,
+  parseGeminiJson,
+} from "../services/geminiService";
 
-export const optimizeResume = async (
-req: Request,
-res: Response
-) => {
-try {
-const { resumeText, jobDescription } = req.body;
+export const optimizeResume = async (req: Request, res: Response) => {
+  try {
+    const { resumeText, jobDescription } = req.body;
 
-
-if (!resumeText || !jobDescription) {
-  return res.status(400).json({
-    success: false,
-    message: "Resume text and job description are required",
-  });
-}
-
-const prompt = `
-
-
-You are an expert Resume Writer and Career Coach.
-
-Optimize the following resume according to the given job description.
+    const prompt = `
+Optimize this resume.
 
 Resume:
 ${resumeText}
@@ -29,36 +17,43 @@ ${resumeText}
 Job Description:
 ${jobDescription}
 
-Provide:
+Return ONLY valid JSON.
 
-1. Improved Resume Content
-2. Missing Skills
-3. ATS Optimization Suggestions
-4. Better Resume Summary
-5. Improved Bullet Points
-6. Final Recommendations
+{
+  "optimizedResume": "Full optimized resume text",
+  "matchScore": 88,
+  "improvements": [
+    {
+      "section": "Experience",
+      "original": "Built websites",
+      "improved": "Built scalable React applications",
+      "reason": "More impactful wording"
+    }
+  ],
+  "addedKeywords": [
+    "React",
+    "TypeScript",
+    "Docker"
+  ],
+  "summaryFeedback":
+    "Resume is highly optimized."
+}
 
-Make the resume more ATS-friendly and recruiter-friendly.
+No markdown.
+JSON only.
 `;
 
+    const result = await generateGeminiResponse(prompt);
 
-const result = await generateGeminiResponse(prompt);
+    const parsed = parseGeminiJson(result);
 
-res.status(200).json({
-  success: true,
-  data: result,
-});
+    res.status(200).json(parsed);
+  } catch (error) {
+    console.error(error);
 
-
-} catch (error) {
-console.error(error);
-
-
-res.status(500).json({
-  success: false,
-  message: "Failed to optimize resume",
-});
-
-
-}
+    res.status(500).json({
+      success: false,
+      message: "Resume optimization failed",
+    });
+  }
 };

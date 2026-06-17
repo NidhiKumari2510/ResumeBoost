@@ -1,15 +1,19 @@
 import { Request, Response } from "express";
-import { generateGeminiResponse } from "../services/geminiService";
+import {
+  generateGeminiResponse,
+  parseGeminiJson,
+} from "../services/geminiService";
 
 export async function generateInterviewQuestions(
   req: Request,
   res: Response
 ) {
   try {
-    const { resumeText, jobDescription } = req.body;
+    const { resumeText, jobDescription } =
+      req.body;
 
     const prompt = `
-You are an expert interview coach.
+Generate interview questions.
 
 Resume:
 ${resumeText}
@@ -17,28 +21,40 @@ ${resumeText}
 Job Description:
 ${jobDescription}
 
-Generate:
-1. Technical Questions
-2. HR Questions
-3. Behavioral Questions
+Return ONLY valid JSON.
 
-Give detailed answers.
+{
+  "technical": [
+    {
+      "question": "",
+      "sampleAnswer": "",
+      "difficulty": "Medium",
+      "tip": ""
+    }
+  ],
+  "hr": [],
+  "behavioral": [],
+  "resumeBased": [],
+  "roleSpecific": []
+}
+
+No markdown.
+JSON only.
 `;
 
-    const response = await generateGeminiResponse(
-      prompt
-    );
+    const result =
+      await generateGeminiResponse(prompt);
 
-    res.status(200).json({
-      success: true,
-      data: response,
-    });
+    const parsed = parseGeminiJson(result);
+
+    res.status(200).json(parsed);
   } catch (error) {
     console.error(error);
 
     res.status(500).json({
       success: false,
-      message: "Failed to generate questions",
+      message:
+        "Interview generation failed",
     });
   }
 }
