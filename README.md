@@ -1,12 +1,21 @@
 # 🚀 ResumeBoost AI
 
-ResumeBoost AI is an AI-powered career assistant designed to help students and job seekers improve their resumes, analyze ATS compatibility, and prepare for interviews with personalized AI-generated insights.
+ResumeBoost AI is a full-stack AI-powered career assistant designed to help students and job seekers improve their resumes, analyze ATS compatibility, and prepare for interviews with personalized AI-generated insights.
 
-Built using React, Vite, Tailwind CSS, and Google's Gemini AI, the platform provides an intuitive and modern interface for resume enhancement and interview preparation.
+Built using React, TypeScript, Node.js, Express.js, MongoDB Atlas, JWT Authentication, and Google's Gemini AI, the platform provides an intuitive experience for resume enhancement, interview preparation, and career growth.
 
 ---
 
-## ✨ Features
+## 🌟 Features
+
+### 🔐 Authentication & User Management
+
+* User Registration & Login
+* JWT-based Authentication
+* Password Hashing using bcryptjs
+* Persistent User Sessions
+* Protected Routes
+* Logout Functionality
 
 ### 📊 ATS Score Checker
 
@@ -14,7 +23,7 @@ Built using React, Vite, Tailwind CSS, and Google's Gemini AI, the platform prov
 * Paste Job Description
 * Analyze resume compatibility with job requirements
 * View ATS score and keyword matching insights
-* Receive improvement suggestions
+* Receive AI-generated improvement suggestions
 
 ### 📝 AI Resume Optimizer
 
@@ -44,114 +53,146 @@ Built using React, Vite, Tailwind CSS, and Google's Gemini AI, the platform prov
 * Experience
 * Certifications
 * Achievements
-* Live preview support
+* Live Preview Support
 
+### 👤 User Dashboard
+
+* Personalized User Experience
+* Authentication State Management
+* User Profile Information
+* Secure Session Handling
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* Framer Motion
+* React Router DOM
+* Axios
+* React Hot Toast
+
+### Backend
+
+* Node.js
+* Express.js
+* TypeScript
+
+### Database
+
+* MongoDB Atlas
+* Mongoose
+
+### Authentication
+
+* JWT (JSON Web Token)
+* bcryptjs
+
+### AI Integration
+
+* Google Gemini AI
+
+### Deployment
+
+* Vercel (Frontend)
+* Render (Backend)
 
 ---
 
-## 📁 Project Structure
-
-```bash
-src/
-│
-├── pages/
-│   ├── Home
-│   ├── ATSChecker
-│   ├── ResumeOptimizer
-│   ├── ResumeBuilder
-│   └── InterviewPrep
-│
-├── components/
-│
-├── services/
-│   └── gemini.ts
-│
-├── utils/
-│   └── fileParser.ts
-│
-├── App.tsx
-└── main.tsx
-```
-
----
 
 ## ⚙️ Environment Variables
 
-Create a `.env` file in the root directory:
+### Frontend (.env)
 
 ```env
-VITE_GEMINI_API_KEY=your_gemini_api_key_here
+VITE_API_URL=http://localhost:5000/api
 ```
 
-Get your API key from Google AI Studio.
+### Backend (.env)
+
+```env
+PORT=5000
+
+MONGO_URI=your_mongodb_connection_string
+
+JWT_SECRET=your_jwt_secret
+
+GEMINI_API_KEY=your_gemini_api_key
+
+FRONTEND_URL=http://localhost:5173
+```
 
 ---
 
 ## 🚀 Installation
 
-Clone the repository:
+### Clone Repository
 
 ```bash
 git clone <repository-url>
 ```
 
-Navigate to the project:
+### Navigate to Project
 
 ```bash
 cd ResumeBoost
 ```
 
-Install dependencies:
+---
+
+## 📦 Frontend Setup
 
 ```bash
+cd frontend
+
 npm install
-```
 
-Start the development server:
-
-```bash
 npm run dev
 ```
 
+Frontend runs on:
+
+```bash
+http://localhost:5173
+```
+
 ---
+
+## 📦 Backend Setup
+
+```bash
+cd backend
+
+npm install
+
+npm run dev
+```
+
+Backend runs on:
+
+```bash
+http://localhost:5000
+```
+
+---
+
 
 ## 🎯 Future Improvements
 
-* User Authentication
 * Resume History Storage
-* Cloud Database Integration
+* ATS Report History
+* Interview Question History
 * Resume Version Tracking
-* Export to PDF
+* Export Resume as PDF
 * AI Career Recommendations
 * Job Match Percentage Analysis
-* Mock Interview Chatbot
+* Mock Interview Simulator
+* Email Notifications
+* OAuth Authentication (Google/GitHub)
 
----
 
-## 📸 Screenshots
-
-Add screenshots of:
-
-* Home Page
-* ATS Checker
-* Resume Optimizer
-* Interview Preparation
-* Resume Builder
-
----
-
-## 🤝 Contributing
-
-Contributions, suggestions, and improvements are welcome.
-
-Feel free to fork the repository and submit a pull request.
-
----
-
-## 📄 License
-
-This project is intended for educational and portfolio purposes.
-
----
-
-### Made with ❤️ using React, Tailwind CSS, and Gemini AI
