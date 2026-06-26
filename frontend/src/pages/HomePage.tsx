@@ -7,7 +7,6 @@ import {
   FileEdit,
   MessageSquare,
   CheckCircle,
-  Star,
   Zap,
   Upload,
   Brain,
@@ -56,56 +55,6 @@ const steps = [
   { icon: Sparkles, step: '04', title: 'Get Personalized Results', desc: 'Receive actionable insights, scores, and tailored improvements.' },
 ];
 
-const testimonials = [
-  {
-    name: 'Priya Sharma',
-    role: 'Software Engineer at Google',
-    avatar: 'PS',
-    text: 'ResumeBoost AI helped me increase my ATS score from 42 to 87. I landed interviews at 3 FAANG companies within a week!',
-    rating: 5,
-  },
-  {
-    name: 'Arjun Mehta',
-    role: 'Data Analyst at Deloitte',
-    avatar: 'AM',
-    text: 'The interview prep feature is incredible. The AI-generated questions were almost exactly what I was asked in real interviews.',
-    rating: 5,
-  },
-  {
-    name: 'Sara Kim',
-    role: 'Product Manager at Stripe',
-    avatar: 'SK',
-    text: 'I\'d been job hunting for months with zero callbacks. After optimizing my resume with this tool, I got 5 calls in 2 days.',
-    rating: 5,
-  },
-];
-
-const pricing = [
-  {
-    name: 'Free',
-    price: '$0',
-    period: 'forever',
-    features: ['3 ATS scans/month', 'Basic optimization', '10 interview questions', 'Resume builder'],
-    cta: 'Get Started Free',
-    highlight: false,
-  },
-  {
-    name: 'Pro',
-    price: '$12',
-    period: '/month',
-    features: ['Unlimited ATS scans', 'Full AI optimization', 'Unlimited interview prep', 'Premium templates', 'Priority support'],
-    cta: 'Start Pro Trial',
-    highlight: true,
-  },
-  {
-    name: 'Teams',
-    price: '$49',
-    period: '/month',
-    features: ['Everything in Pro', '5 team seats', 'Career coaching', 'Custom templates', 'Analytics dashboard'],
-    cta: 'Contact Sales',
-    highlight: false,
-  },
-];
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -191,8 +140,7 @@ export default function HomePage() {
                 {[
                   { label: 'ATS Score Boost', value: '+45%', color: 'text-cyan-400' },
                   { label: 'Interview Calls', value: '3x more', color: 'text-blue-400' },
-                  { label: 'Students Helped', value: '10,000+', color: 'text-emerald-400' },
-                  { label: 'Templates', value: '3 styles', color: 'text-amber-400' },
+                  { label: 'Resume Templates', value: '3 styles', color: 'text-amber-400' },
                 ].map((stat) => (
                   <div key={stat.label} className="text-center">
                     <div className={`text-2xl font-bold font-display ${stat.color}`}>{stat.value}</div>
@@ -318,96 +266,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-24 px-6">
-        <div className="max-w-5xl mx-auto">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-xs font-semibold tracking-widest text-cyan-400 uppercase mb-3">Testimonials</p>
-            <h2 className="section-title">Loved by Students & Professionals</h2>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div
-                key={t.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="glass-card p-6 flex flex-col gap-4"
-              >
-                <div className="flex gap-1">
-                  {Array.from({ length: t.rating }).map((_, j) => (
-                    <Star key={j} className="w-4 h-4 text-amber-400 fill-amber-400" />
-                  ))}
-                </div>
-                <p className="text-sm text-slate-300 leading-relaxed flex-1">"{t.text}"</p>
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-400/20 to-blue-500/20 border border-cyan-500/20 flex items-center justify-center">
-                    <span className="text-xs font-bold text-cyan-400">{t.avatar}</span>
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{t.name}</p>
-                    <p className="text-xs text-slate-500">{t.role}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section className="py-24 px-6 relative">
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 60% 40% at 50% 50%, rgba(59,130,246,0.04) 0%, transparent 70%)',
-        }} />
-        <div className="max-w-4xl mx-auto relative">
-          <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-xs font-semibold tracking-widest text-cyan-400 uppercase mb-3">Pricing</p>
-            <h2 className="section-title">Simple, Transparent Pricing</h2>
-            <p className="section-subtitle mx-auto text-center">Start free, upgrade when you're ready to supercharge your job search.</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {pricing.map((plan, i) => (
-              <motion.div
-                key={plan.name}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className={`glass-card p-6 flex flex-col gap-5 relative ${plan.highlight ? 'border-cyan-500/40' : ''}`}
-                style={plan.highlight ? { boxShadow: '0 0 40px rgba(34,211,238,0.1)' } : {}}
-              >
-                {plan.highlight && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 text-white">
-                    Most Popular
-                  </div>
-                )}
-                <div>
-                  <h3 className="font-semibold text-white">{plan.name}</h3>
-                  <div className="flex items-baseline gap-1 mt-2">
-                    <span className="text-3xl font-bold font-display text-white">{plan.price}</span>
-                    <span className="text-slate-500 text-sm">{plan.period}</span>
-                  </div>
-                </div>
-                <ul className="space-y-2.5 flex-1">
-                  {plan.features.map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-sm text-slate-400">
-                      <CheckCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <button className={plan.highlight ? 'btn-primary w-full' : 'btn-secondary w-full'}>
-                  {plan.cta}
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Footer */}
       <footer className="border-t border-slate-800 py-12 px-6">
@@ -428,7 +286,7 @@ export default function HomePage() {
               <Link to="/builder" className="hover:text-cyan-400 transition-colors">Builder</Link>
               <Link to="/interview" className="hover:text-cyan-400 transition-colors">Interview Prep</Link>
             </div>
-            <p className="text-xs text-slate-600">© 2024 ResumeBoost AI. All rights reserved.</p>
+            <p className="text-xs text-slate-600">© 2026 ResumeBoost AI. All rights reserved.</p>
           </div>
         </div>
       </footer>
